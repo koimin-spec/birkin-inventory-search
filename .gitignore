@@ -9,7 +9,6 @@ lerna-debug.log*
 
 node_modules
 dist
-docs
 .DS_Store
 *.suo
 *.ntvs*
