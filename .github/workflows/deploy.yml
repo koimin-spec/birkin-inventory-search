@@ -24,9 +24,17 @@ jobs:
       - name: Build
         run: npm run build
       
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          cname: birkin-search.github.io
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Commit and push if docs changed
+        run: |
+          if [ -n "$(git status docs/ --porcelain)" ]; then
+            git add docs/
+            git commit -m "[skip ci] Build: Update docs directory"
+            git push
+          else
+            echo "No changes to docs directory"
+          fi
