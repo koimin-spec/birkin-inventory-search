@@ -29,12 +29,12 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
       
-      - name: Commit and push if docs changed
+      - name: Commit and push if dist changed
         run: |
-          if [ -n "$(git status docs/ --porcelain)" ]; then
-            git add docs/
-            git commit -m "[skip ci] Build: Update docs directory"
+          if [ -n "$(git status dist/ --porcelain)" ]; then
+            git add dist/
+            git commit -m "[skip ci] Build: Update dist directory"
             git push
           else
-            echo "No changes to docs directory"
+            echo "No changes to dist directory"
           fi
